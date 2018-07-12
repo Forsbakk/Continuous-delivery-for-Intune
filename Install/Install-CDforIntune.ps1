@@ -1,4 +1,8 @@
-$ScriptLocURI = "https://raw.githubusercontent.com/Forsbakk/Intune-Application-Installers/master/Continuous%20delivery%20for%20Intune/Install/ScriptBETA.ps1"
+Param(
+    $BranchName = ""
+)
+
+$cfgs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json"
 
 If (!(Test-Path "C:\Windows\Scripts")) {
     New-Item "C:\Windows\Scripts" -ItemType Directory
