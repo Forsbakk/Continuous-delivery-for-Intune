@@ -1,17 +1,17 @@
 $Versions = @(
     @{
         Name = "prod.bs"
-        Version = "0.0.8"
+        Version = "0.0.1"
         File = "Script.prod.us.ps1"
     },
     @{
         Name = "prud.us"
-        Version = "0.0.8"
+        Version = "0.0.1"
         File = "Script.prod.us.ps1"
     },
     @{
         Name = "beta"
-        Version = "0.0.9"
+        Version = "0.0.1"
         File = "Script.beta.ps1"
     }
 )

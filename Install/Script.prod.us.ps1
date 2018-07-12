@@ -1,4 +1,4 @@
-﻿$BranchName = "beta"
+﻿$BranchName = "prod.us"
 $Version = "0.0.1"
 
 

@@ -1,17 +1,30 @@
-Param(
-    $BranchName = ""
+﻿Param(
+    $BranchName = "",
+    $WaitFor = $null,
+    $CleanUp = $false
 )
 
-$cfgs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json"
+If (!($WaitFor -eq $null)) {
+    Do {
+        $PID = Get-Process -Id $WaitFor
+    }
+    Until ($PID -eq $null)
+}
+
+$cfg = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json" -UseBasicParsing | ConvertFrom-Json
+
+$cfg = $cfg | Where-Object { $_.Name -eq $BranchName }
 
 If (!(Test-Path "C:\Windows\Scripts")) {
     New-Item "C:\Windows\Scripts" -ItemType Directory
 }
 
+$ScriptLocURI = "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/Install/$($cfg.File)"
+
 Invoke-WebRequest -Uri $ScriptLocURI -OutFile "C:\Windows\Scripts\Start-ContinuousDelivery.ps1"
 
 $ScheduledTaskName = "Continuous delivery for Intune"
-$ScheduledTaskVersion = "0.0.8.3.beta"
+$ScheduledTaskVersion = "$($cfg.Name) $($cfg.Version)"
 $ScheduledTask = Get-ScheduledTask -TaskName $ScheduledTaskName
 
 if ($ScheduledTask) {
@@ -24,3 +37,7 @@ $Trigger = New-ScheduledTaskTrigger -AtLogOn
 $Settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -RunOnlyIfNetworkAvailable -StartWhenAvailable -DontStopOnIdleEnd
 Register-ScheduledTask -Action $Action -Trigger $Trigger -User $User -RunLevel Highest -Settings $Settings -TaskName $ScheduledTaskName -Description $ScheduledTaskVersion
 Start-ScheduledTask -TaskName $ScheduledTaskName
+
+If ($CleanUp -eq $true) {
+    Remove-Item "$env:TEMP\Install-CDforIntune.ps1" -Force
+}
