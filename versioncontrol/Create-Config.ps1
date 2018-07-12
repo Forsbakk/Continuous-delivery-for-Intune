@@ -1,4 +1,4 @@
-$Versions = @(
+﻿$Versions = @(
     @{
         Name = "prod.bs"
         Version = "0.0.1"
