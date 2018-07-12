@@ -5,7 +5,7 @@ $Versions = @(
         File = "Script.prod.us.ps1"
     },
     @{
-        Name = "prud.us"
+        Name = "prod.us"
         Version = "0.0.1"
         File = "Script.prod.us.ps1"
     },
@@ -15,4 +15,4 @@ $Versions = @(
         File = "Script.beta.ps1"
     }
 )
-$Versions | ConvertTo-Json -Compress | Out-File config.json -Encoding default
+$Versions | ConvertTo-Json -Compress | Out-File config.json
