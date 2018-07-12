@@ -15,4 +15,4 @@
         File = "Script.beta.ps1"
     }
 )
-$Versions | ConvertTo-Json -Compress | Out-File config.json -Encoding default
+$Versions | ConvertTo-Json -Compress | Out-File config.json -Encoding utf8
