@@ -15,4 +15,4 @@ $Versions = @(
         File = "Script.beta.ps1"
     }
 )
-$Versions | ConvertTo-Json -Compress | Out-File config.json
+$Versions | ConvertTo-Json -Compress | Out-File config.json -Encoding default
