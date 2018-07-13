@@ -17,4 +17,4 @@
         }
     )
 }
-$Versions | ConvertTo-Json -Compress | Out-File config.json
+$Versions | ConvertTo-Json -Compress | Out-File config.json -Encoding utf8
