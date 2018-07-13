@@ -1,1 +1,1 @@
-# Continuous-delivery-for-Intune
+# Continuous delivery for Intune
