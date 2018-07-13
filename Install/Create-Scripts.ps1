@@ -8,5 +8,5 @@ foreach ($i in $ScriptsToCreate) {
 
     $newScript = $Script.Replace("`$BranchName = `"`"", "`$BranchName = `"$($i.Name)`"")
     $newScript = $newScript.Replace("`$Version = `"`"", "`$Version = `"$($i.Version)`"")
-    $newScript | Out-File "$PSScriptRoot\CDforIntuneScript\Install-CDforIntune.$($i.Name).ps1" -Encoding default
+    $newScript | Out-File "$PSScriptRoot\CDforIntuneScript\Script.$($i.Name).ps1" -Encoding default
 }
