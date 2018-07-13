@@ -54,4 +54,4 @@ $CustomExec = @(
         wrkDir         = "C:\Windows\Temp"
     }
 )
-$CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File config.json -Encoding default
+$CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default

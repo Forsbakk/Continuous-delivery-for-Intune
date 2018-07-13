@@ -12,4 +12,4 @@ $ChocoPkgs = @(
         Mode = "install"
     }
 )
-$ChocoPkgs | ConvertTo-Json -Compress | Out-File config.json -Encoding default
+$ChocoPkgs | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default

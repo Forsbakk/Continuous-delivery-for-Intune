@@ -45,4 +45,4 @@ $regfiles = @(
         Type = "HKCU"
     }
 )
-$regfiles | ConvertTo-Json -Compress | Out-File config.json -Encoding default
+$regfiles | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
