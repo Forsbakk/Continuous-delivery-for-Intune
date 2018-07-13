@@ -1,5 +1,5 @@
-﻿$BranchName = "prod.bs"
-$Version = "0.0.1"
+﻿$BranchName = ""
+$Version = ""
 
 
 function Write-Log {
@@ -22,7 +22,7 @@ function Write-Log {
 }
 
 
-$cfg = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json" -UseBasicParsing | ConvertFrom-Json
+$cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json" -UseBasicParsing
 $cfg = $cfg | Where-Object { $_.Name -eq $BranchName }
 
 if ($cfg.Version -eq $Version) {
@@ -114,7 +114,7 @@ catch {
     Write-Log -Value "Failed to upgrade chocolatey and all existing packages" -Severity 3 -Component "Chocolatey"
 }
 
-$ChocoConf = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Choco/config.json" -UseBasicParsing | ConvertFrom-Json
+$ChocoConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Choco/config.json" -UseBasicParsing
 
 ForEach ($ChockoPkg in $ChocoConf) {
     Write-Log -Value "Running $($ChockoPkg.Mode) on $($ChockoPkg.Name)" -Severity 1 -Component "Chocolatey"
@@ -127,7 +127,7 @@ ForEach ($ChockoPkg in $ChocoConf) {
 }
 
 
-$AdvInstallers = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Custom%20Execution/config.json" -UseBasicParsing | ConvertFrom-Json
+$AdvInstallers = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Custom%20Execution/config.json" -UseBasicParsing
 
 foreach ($AdvInst in $AdvInstallers) {
 
@@ -178,7 +178,7 @@ foreach ($AdvInst in $AdvInstallers) {
 }
 
 
-$PSs = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/PowerShell/config.json" -UseBasicParsing | ConvertFrom-Json
+$PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/PowerShell/config.json" -UseBasicParsing
 
 foreach ($PS in $PSs) {
     $runDetectionRule = Invoke-Expression -Command $PS.Detection
@@ -194,7 +194,7 @@ foreach ($PS in $PSs) {
 }
 
 
-$SCConf = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Shortcuts/config.json" -UseBasicParsing | ConvertFrom-Json
+$SCConf = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Shortcuts/config.json" -UseBasicParsing
 
 ForEach ($SC in $SCConf) {
     If ($SC.Mode -eq "Uninstall") {
@@ -253,7 +253,7 @@ ForEach ($SC in $SCConf) {
 }
 
 
-$regfiles = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Regedit/config.json" -UseBasicParsing | ConvertFrom-Json
+$regfiles = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/$BranchName/Regedit/config.json" -UseBasicParsing
 
 ForEach ($regfile in $regfiles) {
     Write-Log -Value "Starting detection of Regedit settings; $($regfile.URL)" -Severity 1 -Component "Regedit"

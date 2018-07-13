@@ -6,9 +6,9 @@
 
 If (!($WaitFor -eq $null)) {
     Do {
-        $PID = Get-Process -Id $WaitFor
+        $proc = Get-Process -Id $WaitFor
     }
-    Until ($PID -eq $null)
+    Until ($proc -eq $null)
 }
 
 $cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json"
