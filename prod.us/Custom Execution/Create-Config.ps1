@@ -26,7 +26,7 @@ $CustomExec = @(
                 Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%HK-ELEVv1%'`")"
             }
         )
-        wrkDir         = "C:\Windows\Temp"                
+        wrkDir         = "C:\Windows\Temp"
     },
     @{
         Name           = "Fix 20DA Touchscreen"
@@ -51,7 +51,7 @@ $CustomExec = @(
                 Rule = "[bool](!(Get-WmiObject -Query `"select * from win32_computersystem where model like '20DA%'`")) -or (Get-WmiObject -Query `"select * from win32_PnPSignedDriver where DeviceName like 'I2C Controller'`")"
             }
         )
-        wrkDir         = "C:\Windows\Temp" 
-    }   
+        wrkDir         = "C:\Windows\Temp"
+    }
 )
-$CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File config.json
+$CustomExec | ConvertTo-Json -Depth 4 -Compress | Out-File config.json -Encoding default

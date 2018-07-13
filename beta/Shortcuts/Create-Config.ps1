@@ -96,4 +96,4 @@ $Shortcuts = @(
         Mode            = "Uninstall"
     }
 )
-$Shortcuts | ConvertTo-Json -Compress | Out-File config.json
+$Shortcuts | ConvertTo-Json -Compress | Out-File config.json -Encoding default

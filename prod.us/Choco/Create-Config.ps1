@@ -12,4 +12,4 @@ $ChocoPkgs = @(
         Mode = "install"
     }
 )
-$ChocoPkgs | ConvertTo-Json -Compress | Out-File config.json
+$ChocoPkgs | ConvertTo-Json -Compress | Out-File config.json -Encoding default

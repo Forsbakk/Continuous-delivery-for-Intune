@@ -15,4 +15,4 @@ $PowerShell = @(
         Detection = "[bool](Get-ScheduledTask -TaskName 'Nightly Rebootv0.3')"
     }
 )
-$PowerShell | ConvertTo-Json -Compress | Out-File config.json
+$PowerShell | ConvertTo-Json -Compress | Out-File config.json -Encoding default

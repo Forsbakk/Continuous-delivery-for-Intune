@@ -11,7 +11,7 @@ If (!($WaitFor -eq $null)) {
     Until ($PID -eq $null)
 }
 
-$cfg = Invoke-WebRequest -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json" -UseBasicParsing | ConvertFrom-Json
+$cfg = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/versioncontrol/config.json"
 
 $cfg = $cfg | Where-Object { $_.Name -eq $BranchName }
 

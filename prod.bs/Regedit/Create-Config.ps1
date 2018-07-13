@@ -45,4 +45,4 @@ $regfiles = @(
         Type = "HKCU"
     }
 )
-$regfiles | ConvertTo-Json -Compress | Out-File config.json
+$regfiles | ConvertTo-Json -Compress | Out-File config.json -Encoding default
