@@ -97,7 +97,7 @@ if ($licenced -eq $false) {
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 
 if (!(Test-Path -Path $ChocoBin)) {
-    Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Invoke-Chocolatey"
+    Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Chocolatey"
     try {
         Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     }
