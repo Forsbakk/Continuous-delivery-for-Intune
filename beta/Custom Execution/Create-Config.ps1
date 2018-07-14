@@ -18,7 +18,7 @@ $CustomExec = @(
         Execution      = @(
             @{
                 Execute   = "powershell.exe"
-                Arguments = "-ExecutionPolicy Bypass -File `"C:\Windows\Temp\Install-HKELEVv1.ps1`""
+                Arguments = "-ExecutionPolicy Bypass -File 'C:\Windows\Temp\Install-HKELEVv1.ps1'"
             }
         )
         Detection      = @(
