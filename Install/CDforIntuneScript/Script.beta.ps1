@@ -1,6 +1,6 @@
 $BranchName = "beta"
-$Version = "0.0.1"
-
+$Version = "0.0.2"
+#added some crap
 
 function Write-Log {
     Param(
