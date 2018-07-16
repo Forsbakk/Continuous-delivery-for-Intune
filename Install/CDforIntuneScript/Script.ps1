@@ -182,14 +182,14 @@ $PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Contin
 
 foreach ($PS in $PSs) {
     $runDetectionRule = Invoke-Expression -Command $PS.Detection
-    Write-Log -Value "Detecting $($PS.Name)" -Severity 1 -Component "Invoke-PowerShell"
+    Write-Log -Value "Detecting $($PS.Name)" -Severity 1 -Component "PowerShell"
     if (!($runDetectionRule -eq $true)) {
-        $Arguments = "-Command $($Command)"
-        Write-Log -Value "Starting powershell.exe with arguments:$($Arguments)" -Severity 1 -Component "Invoke-PowerShell"
-        Start-Process -FilePath "powershell.exe" -ArgumentList $PS.Arguments
+        $Arguments = "-Command $($PS.Command)"
+        Write-Log -Value "Starting powershell.exe with arguments: $Arguments" -Severity 1 -Component "PowerShell"
+        Start-Process -FilePath "powershell.exe" -ArgumentList $Arguments
     }
     else {
-        Write-Log -Value "$($Name) is already run" -Severity 1 -Component "Invoke-PowerShell"
+        Write-Log -Value "$($PS.Name) is already run" -Severity 1 -Component "PowerShell"
     }
 }
 

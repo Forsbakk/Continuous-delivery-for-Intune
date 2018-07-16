@@ -1,14 +1,5 @@
 $Shortcuts = @(
     @{
-        Name            = "GIMP 2.10"
-        Type            = "lnk"
-        Path            = "C:\Program Files\GIMP 2\bin\gimp-2.10.exe"
-        WorkingDir      = "%USERPROFILE%"
-        IconFileandType = "C:\Program Files\GIMP 2\bin\gimp-2.10.exe, 0"
-        Description     = "GIMP 2.10"
-        Mode            = "Install"
-    },
-    @{
         Name            = "Google Earth"
         Type            = "lnk"
         Path            = "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe"
@@ -87,6 +78,16 @@ $Shortcuts = @(
     },
     @{
         Name            = "GIMP 2"
+        Type            = "lnk"
+        Path            = "DUMMY"
+        Arguments       = "DUMMY"
+        WorkingDir      = "DUMMY"
+        IconFileandType = "DUMMY"
+        Description     = "DUMMY"
+        Mode            = "Uninstall"
+    },
+    @{
+        Name            = "GIMP 2.10"
         Type            = "lnk"
         Path            = "DUMMY"
         Arguments       = "DUMMY"
