@@ -1,5 +1,5 @@
 $BranchName = "prod.bs"
-$Version = "0.0.1"
+$Version = "1.0.0"
 
 
 function Write-Log {
@@ -97,7 +97,7 @@ if ($licenced -eq $false) {
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 
 if (!(Test-Path -Path $ChocoBin)) {
-    Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Invoke-Chocolatey"
+    Write-Log -Value "$ChocoBin not detected; starting installation of chocolatey" -Severity 2 -Component "Chocolatey"
     try {
         Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
     }
@@ -182,14 +182,14 @@ $PSs = Invoke-RestMethod -Uri "https://raw.githubusercontent.com/Forsbakk/Contin
 
 foreach ($PS in $PSs) {
     $runDetectionRule = Invoke-Expression -Command $PS.Detection
-    Write-Log -Value "Detecting $($PS.Name)" -Severity 1 -Component "Invoke-PowerShell"
+    Write-Log -Value "Detecting $($PS.Name)" -Severity 1 -Component "PowerShell"
     if (!($runDetectionRule -eq $true)) {
-        $Arguments = "-Command $($Command)"
-        Write-Log -Value "Starting powershell.exe with arguments:$($Arguments)" -Severity 1 -Component "Invoke-PowerShell"
-        Start-Process -FilePath "powershell.exe" -ArgumentList $PS.Arguments
+        $Arguments = "-Command $($PS.Command)"
+        Write-Log -Value "Starting powershell.exe with arguments: $Arguments" -Severity 1 -Component "PowerShell"
+        Start-Process -FilePath "powershell.exe" -ArgumentList $Arguments
     }
     else {
-        Write-Log -Value "$($Name) is already run" -Severity 1 -Component "Invoke-PowerShell"
+        Write-Log -Value "$($PS.Name) is already run" -Severity 1 -Component "PowerShell"
     }
 }
 

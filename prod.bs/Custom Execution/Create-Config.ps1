@@ -26,7 +26,7 @@ $CustomExec = @(
                 Rule = "[bool](Get-WmiObject -Query `"select * from win32_printer where name like '%HK-ELEVv1%'`")"
             }
         )
-        wrkDir         = "C:\Windows\Temp"                
+        wrkDir         = "C:\Windows\Temp"
     },
     @{
         Name           = "Fix 20DA Touchscreen"

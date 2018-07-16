@@ -1,18 +1,15 @@
 ﻿$Versions = @(
     @{
         Name    = "prod.bs"
-        Version = "0.0.1"
-        File    = "Script.prod.us.ps1"
+        Version = "1.0.0"
     },
     @{
         Name    = "prod.us"
-        Version = "0.0.1"
-        File    = "Script.prod.us.ps1"
+        Version = "1.0.0"
     },
     @{
         Name    = "beta"
-        Version = "0.0.2"
-        File    = "Script.beta.ps1"
+        Version = "1.0.0"
     }
 )
 $Versions | ConvertTo-Json -Compress | Out-File "$PSScriptRoot\config.json" -Encoding default
