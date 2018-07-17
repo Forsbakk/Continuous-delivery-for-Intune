@@ -31,10 +31,10 @@ if ($cfg.Version -eq $Version) {
 else {
     Write-Log -Value "Newer version found, upgrading" -Severity 1 -Component "Update"
 
-    $ScriptLocURI = "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/Install/Install-CDforIntune.ps1"
+    $ScriptLocURI = "https://raw.githubusercontent.com/Forsbakk/Continuous-delivery-for-Intune/master/Install/Install-CDforIntune/Install-CDforIntune.ps1"
     Invoke-WebRequest -Uri $ScriptLocURI -OutFile "$env:TEMP\Install-CDforIntune.ps1"
 
-    Start-Process "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$env:TEMP\Install-CDforIntune.ps1`" -BranchName $BranchName -WaitFor $PID -CleanUp $true"
+    Start-Process "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$env:TEMP\Install-CDforIntune.ps1`" -BranchName $BranchName -WaitFor $PID -CleanUp $true" -WindowStyle Hidden
     break
 }
 
