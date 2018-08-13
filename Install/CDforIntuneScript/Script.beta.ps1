@@ -1,5 +1,5 @@
 $BranchName = "beta"
-$Version = "1.0.0"
+$Version = "1.0.1"
 
 
 function Write-Log {
@@ -84,7 +84,7 @@ if ($licenced -eq $false) {
     :outer foreach ($i in $lic) {
         if ($i.LicenseStatus -eq "1") {
             Write-Log -Value "Windows 10 is licensed" -Severity 1 -Component "slmgr"
-            $licenced = $true
+            #$licenced = $true
             break outer
         }
     }
