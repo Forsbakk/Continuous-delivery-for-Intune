@@ -1,5 +1,5 @@
 $BranchName = "prod.us"
-$Version = "1.0.1"
+$Version = "1.0.0"
 
 
 function Write-Log {
@@ -66,7 +66,7 @@ $lic = Get-WmiObject SoftwareLicensingProduct -Filter "ApplicationID = '55c92734
 :outer foreach ($i in $lic) {
     if ($i.LicenseStatus -eq "1") {
         Write-Log -Value "Windows 10 is licensed" -Severity 1 -Component "slmgr"
-        #$licenced = $true
+        $licenced = $true
         break outer
     }
 }
