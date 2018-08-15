@@ -1,5 +1,5 @@
 $BranchName = "prod.bs"
-$Version = "1.0.0"
+$Version = "1.0.1"
 
 
 function Write-Log {
@@ -59,20 +59,9 @@ If (!($CurrentName -eq $NewName)) {
 }
 
 
-Write-Log -Value "Checking Windows 10 activation status" -Severity 1 -Component "slmgr"
+Write-Log -Value "Reactivating Windows 10" -Severity 1 -Component "slmgr"
 
-$licenced = $false
-$lic = Get-WmiObject SoftwareLicensingProduct -Filter "ApplicationID = '55c92734-d682-4d71-983e-d6ec3f16059f'" -Property LicenseStatus -ErrorAction Stop
-:outer foreach ($i in $lic) {
-    if ($i.LicenseStatus -eq "1") {
-        Write-Log -Value "Windows 10 is licensed" -Severity 1 -Component "slmgr"
-        $licenced = $true
-        break outer
-    }
-}
-
-if ($licenced -eq $false) {
-    Write-Log -Value "Windows 10 was unlicensed; activating" -Severity 2 -Component "slmgr"
+try {
     $ClientKey = "NW6C2-QMPVW-D7KKK-3GKT6-VCFB2"
     $kmshost = "10.85.16.21"
 
@@ -81,18 +70,11 @@ if ($licenced -eq $false) {
     $KMSservice.SetKeyManagementServiceMachine($kmshost)
     $KMSservice.RefreshLicenseStatus()
 
-    :outer foreach ($i in $lic) {
-        if ($i.LicenseStatus -eq "1") {
-            Write-Log -Value "Windows 10 is licensed" -Severity 1 -Component "slmgr"
-            $licenced = $true
-            break outer
-        }
-    }
-    if ($licenced -eq $false) {
-        Write-Log -Value "Windows 10 failed to license" -Severity 3 -Component "slmgr"
-    }
+    Write-Log -Value "Windows 10 has been reactivated" -Severity 1 -Component "slmgr"
 }
-
+catch {
+    Write-Log -Value "Windows 10 failed to reactivate" -Severity 3 -Component "slmgr"
+}
 
 $ChocoBin = $env:ProgramData + "\Chocolatey\bin\choco.exe"
 
