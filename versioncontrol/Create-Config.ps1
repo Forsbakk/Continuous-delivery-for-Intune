@@ -8,6 +8,10 @@
         Version = "1.0.1"
     },
     @{
+        Name    = "prod.hovos"
+        Version = "1.0.1"
+    },
+    @{
         Name    = "beta"
         Version = "1.0.1"
     }
